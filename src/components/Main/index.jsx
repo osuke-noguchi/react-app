@@ -1,7 +1,7 @@
 import Head from 'next/head';
-import styles from './Main.module.css';
-import { Links } from './Links';
-import { Headline } from './Headline';
+import styles from 'src/components/Main/Main.module.css';
+import { Links } from 'src/components/Links';
+import { Headline } from 'src/components/Headline';
 
 export function Main(props) {
   return (
@@ -13,3 +13,4 @@ export function Main(props) {
     </main>
   );
 }
+;

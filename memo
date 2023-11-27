@@ -1,6 +1,7 @@
 # React メモ
 ## コンポーネント
 ・小要素はブロック単位で定義する。divなど。フラグメントは使わない。
+・pagesの親コンポーネントでは、使ってもいい。`<></>`かk
 
 ## Props
 ・Booleanのtrueはそのまま渡せる。{}を省略できる
@@ -15,3 +16,9 @@ prefetch機能を使うとあらかじめ先のデータを取得するので、
 
 ## map
 コンポーネントを繰り返すときはmapを使う。データと処理を分ける。
+
+# リファクタ
+・componentsディレクトリ配下にFooterディレクトリなどを作成。index.jsxとするとimportとパスが長くならい。
+・import時のパスは、絶対パスの方が階層が深くならずにわかりやすい。
+・絶対パスの補完："javascript.preferences.importModuleSpecifier": "non-relative"　を設定する。
+・_app.jsxには共通化したい処理を定義する
