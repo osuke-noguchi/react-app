@@ -3,23 +3,47 @@ import styles from 'src/styles/Home.module.css';
 import { Footer } from 'src/components/Footer';
 import { Main } from 'src/components/Main';
 import { Header } from 'src/components/Header';
-import { useEffect, useState } from 'react';
-
+import { useCallback, useEffect, useState } from 'react';
 
 export default function Home() {
   const [count, setCount] = useState(1);
+  const [text, setText] = useState('');
+  const [isShow, setIsShow] = useState(true);
+  const [array, setArray] = useState([]);
 
-  const handleClick = () => {
-    setCount((count) => count  + 1);
-    setCount((count) => count  + 1);
-  };
+  const handleClick = useCallback(
+    (e) => {
+      if (count < 10) {
+        setCount((prevCount) => prevCount + 1);
+      }
+    },
+    [count]
+  );
+
+  const handleDisplay = useCallback(() => {
+    setIsShow((prevIsShow) => !prevIsShow);
+  }, []);
+
+  const handleAdd = useCallback(() => {
+    setArray((prevArray) => {
+      if (prevArray.some(item => item === text)) {
+        alert("同じ値がすでに存在します");
+        return prevArray;
+      }
+      return[...prevArray, text];
+    });
+  }, [text]);
+
+  const onChange = useCallback((e) => {
+    setText(e.target.value.trim());
+  }, []);
 
   useEffect(() => {
-    document.body.style.backgroundColor = "lightblue";
+    document.body.style.backgroundColor = 'lightblue';
 
     return () => {
-      document.body.style.backgroundColor = "";
-    }
+      document.body.style.backgroundColor = '';
+    };
   }, []);
 
   return (
@@ -28,9 +52,16 @@ export default function Home() {
         <title>Index Page</title>
       </Head>
       <Header />
-      <h1>{count}</h1>
-      <button onClick={handleClick}
-      >ボタン</button>
+      {isShow ? <h1>{count}</h1> : null}
+      <button onClick={handleClick}>ボタン</button>
+      <button onClick={handleDisplay}>{isShow ? '非表示' : '表示'}</button>
+      <input type="text" value={text} onChange={onChange} />
+      <button onClick={handleAdd}>追加</button>
+      <ul>
+        {array.map((item) => {
+          return <li key={item}>{item}</li>;
+        })}
+      </ul>
       <Main page="index"></Main>
       <Footer />
     </div>
