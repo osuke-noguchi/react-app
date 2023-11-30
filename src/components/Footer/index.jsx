@@ -1,6 +1,6 @@
 import styles from 'src/components/Footer/Footer.module.css';
 
-export function Footer() {
+export const Footer = () => {
   return (
     <footer className={styles.footer}>
       <a
@@ -8,9 +8,8 @@ export function Footer() {
         target="_blank"
         rel="noopener noreferrer"
       >
-        Powered by{' '}
-        <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
+        Powered by <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
       </a>
     </footer>
   );
-}
+};
